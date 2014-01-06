@@ -1,0 +1,25 @@
+h1.main-header 
+  | user 
+  = @user.surname + ' ' + @user.name
+
+div.row
+  div.span7
+    dl.dl-horizontal
+      dt
+        strong Surname: 
+      dd.highlighted
+        = @user.surname
+       
+      dt
+        strong Name: 
+      dd.highlighted
+        = @user.name
+       
+      dt
+        strong Birth date: 
+      dd.highlighted
+        = @user.birthday
+
+    div.btn-group
+      = link_to 'Назад', users_path, :class => 'btn'
+      = link_to 'Редактировать', edit_user_path(@user), :class => 'btn'

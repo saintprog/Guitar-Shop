@@ -1,0 +1,24 @@
+- if @user.errors.any?
+  div#error_explanation
+    h2 
+      = pluralize(@user.errors.count, "error") 
+      | prohibited from being saved:
+    ul
+    - @user.errors.full_messages.each do |msg|
+      li = msg
+
+= form_for @user do |f|
+  p
+    = f.label :surname
+    = f.text_field :surname
+
+  p
+    = f.label :name
+    = f.text_field :name
+
+  p
+    = f.label :birthday
+    = f.text_field :birthday, :class => 'datepicker'
+ 
+  p
+    = f.submit :class => 'btn btn-primary'

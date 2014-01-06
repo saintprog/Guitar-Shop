@@ -1,0 +1,32 @@
+h1.main-header
+  | guitars#index
+
+table.table.table-bordered.table-condensed
+  tr
+    th.span1 id
+    th.span2 Марка
+    th.span2 Модель
+    th.span2 Стоимость
+    th.span2 Количество
+    th.span2 Редактировать
+    th.span2 Удалить
+  
+ 
+  - @guitars.each do |guitar|
+    tr
+      td 
+        = guitar.id 
+      td 
+        = link_to guitar.brand, guitar_path(guitar)
+      td 
+        = link_to guitar.model, guitar_path(guitar)
+      td 
+        = guitar.cost
+      td 
+        = guitar.count
+      td 
+        = link_to 'Редактировать', edit_guitar_path(guitar) 
+      td 
+        = link_to 'Удалить', guitar_path(guitar),method: :delete, data: { confirm: 'Are you sure?' } 
+    
+= link_to 'Новая гитара', new_guitar_path, :class => 'btn' 

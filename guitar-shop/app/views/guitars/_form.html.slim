@@ -1,0 +1,28 @@
+- if @guitar.errors.any?
+  div#error_explanation
+    h2 
+      = pluralize(@guitar.errors.count, "error") 
+      | prohibited from being saved:
+    ul
+    - @guitar.errors.full_messages.each do |msg|
+      li = msg
+
+= form_for @guitar do |f|
+  p
+    = f.label :brand
+    = f.text_field :brand
+
+  p
+    = f.label :model
+    = f.text_field :model
+
+  p
+    = f.label :cost
+    = f.text_field :cost
+
+  p
+    = f.label :count
+    = f.text_field :count
+ 
+  p
+    = f.submit :class => 'btn btn-primary'

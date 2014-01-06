@@ -1,0 +1,29 @@
+h1.main-header
+  | users#index
+
+table.table.table-bordered.table-condensed
+  tr
+    th.span1 id
+    th.span2 Фамилия
+    th.span2 Имя
+    th.span2 День Рождения
+    th.span2 Редактировать
+    th.span2 Удалить
+  
+ 
+  - @users.each do |user|
+    tr
+      td 
+        = user.id 
+      td 
+        = link_to user.surname, user_path(user)
+      td 
+        = link_to user.name, user_path(user)
+      td 
+        = user.birthday
+      td 
+        = link_to 'Редактировать', edit_user_path(user) 
+      td 
+        = link_to 'Удалить', user_path(user),method: :delete, data: { confirm: 'Are you sure?' } 
+    
+= link_to 'Новый клиент', new_user_path, :class => 'btn' 
