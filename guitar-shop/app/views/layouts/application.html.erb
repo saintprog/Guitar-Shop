@@ -7,9 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class='container'>
-  <div class='row'>
-    <div class='span12'>
+<div class = 'container'>
+  <div class = 'row'>
+    <div class = 'span12'>
+      <div class = "navbar">
+        <div class = "navbar-inner">
+
+          <%= link_to 'GuitarSHOP', guitars_path, :class => "brand" %>
+
+          <div class = "nav pull-right">
+            <% if user_signed_in? %>
+              <span>Здравствуйте, <%= current_user.email %></span>
+              <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+            <% else %>
+              <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       
       <%= yield %>
       
