@@ -20,6 +20,22 @@ div.row
       dd.highlighted
         = @user.birthday
 
+      dt
+        strong Orders:
+      dd
+        ul.unstyled
+          - @user.orders.all.each do |order|
+            - @payments = 0
+            - order.payments.all.each do |payment|
+              - @payments += payment.summ
+            li.highlighted
+              = link_to "#{Guitar.find(order.guitar_id).brand} #{Guitar.find(order.guitar_id).model}", edit_order_path(order)
+              = " payments: #{@payments} " 
+              = link_to 'Отменить заказ', order_path(order), method: :delete
+              - if @payments >= order.cost
+                - order.update_attribute('status', "complete")
+                = " Заказ полностью оплачен"
+
     div.btn-group
-      = link_to 'Назад', users_path, :class => 'btn'
+      = link_to 'Назад', guitars_path, :class => 'btn'
       = link_to 'Редактировать', edit_user_path(@user), :class => 'btn'

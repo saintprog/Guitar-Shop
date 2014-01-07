@@ -3,10 +3,11 @@ table.table.table-bordered.table-condensed
     th.span1 id
     th.span2 Марка
     th.span2 Модель
-    th.span2 Стоимость
-    th.span2 Количество
-    th.span2 Редактировать
-    th.span2 Удалить
+    th.span1 Стоимость
+    th.span1 Количество
+    th.span1 Заказать
+    th.span1 Редактировать
+    th.span1 Удалить
   
  
   - @guitars.each do |guitar|
@@ -22,12 +23,14 @@ table.table.table-bordered.table-condensed
       td 
         = guitar.count
       p
-      - if user_signed_in?
         td
-          = link_to 'Заказать', orders_path(:user_id => current_user.id, :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
-      - else
-        td
-          | Авторизуйтесь
+          - if user_signed_in?
+            - if guitar.count != 0
+              = link_to 'Заказать', orders_path(:user_id => current_user.id, :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
+            - else
+              | Товара нет на складе
+          - else
+            | Авторизуйтесь
       td 
         = link_to 'Редактировать', edit_guitar_path(guitar) 
       td 
