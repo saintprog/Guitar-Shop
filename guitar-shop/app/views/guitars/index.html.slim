@@ -1,6 +1,3 @@
-h1.main-header
-  | guitars#index
-
 table.table.table-bordered.table-condensed
   tr
     th.span1 id
@@ -24,6 +21,13 @@ table.table.table-bordered.table-condensed
         = guitar.cost
       td 
         = guitar.count
+      p
+      - if user_signed_in?
+        td
+          = link_to 'Заказать', orders_path(:user_id => current_user.id, :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
+      - else
+        td
+          | Авторизуйтесь
       td 
         = link_to 'Редактировать', edit_guitar_path(guitar) 
       td 

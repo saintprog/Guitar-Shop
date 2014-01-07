@@ -1,8 +1,10 @@
 GuitarShop::Application.routes.draw do
+
   devise_for :users
 
   resources :users
   resources :guitars
+  resources :orders
 
   root :to => 'guitars#index'
 
