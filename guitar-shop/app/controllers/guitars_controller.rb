@@ -1,44 +1,72 @@
 class GuitarsController < ApplicationController
   def index
-    @guitars = Guitar.all
+    if can? :read, Guitar
+      @guitars = Guitar.all
+    else
+      redirect_to root_url
+    end
   end
 
   def show
-    @guitar = Guitar.find(params[:id])
+    if can? :read, Guitar
+      @guitar = Guitar.find(params[:id])
+    else
+      redirect_to root_url
+    end
   end
 
   def edit
-    @guitar = Guitar.find(params[:id])
+    if can? :update, Guitar
+      @guitar = Guitar.find(params[:id])
+    else
+      redirect_to root_url
+    end
   end
 
   def new
-    @guitar = Guitar.new
+    if can? :create, Guitar
+      @guitar = Guitar.new
+    else
+      redirect_to root_url
+    end
   end
 
   def update
-    @guitar = Guitar.find(params[:id])
-    if @guitar.update_attributes(params[:guitar])
-      redirect_to @guitar
+    if can? :update, Guitar
+      @guitar = Guitar.find(params[:id])
+      if @guitar.update_attributes(params[:guitar])
+        redirect_to @guitar
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to root_url
     end
   end
 
   def create
-    @guitar = Guitar.new(params[:guitar])
- 
-    if @guitar.save
-      redirect_to @guitar
+    if can? :create, Guitar
+      @guitar = Guitar.new(params[:guitar])
+   
+      if @guitar.save
+        redirect_to @guitar
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      redirect_to root_url
     end
   end
 
   def destroy
-    @guitar = Guitar.find(params[:id])
-    @guitar.destroy
-   
-    redirect_to guitars_path
+    if can? :update, Guitar
+      @guitar = Guitar.find(params[:id])
+      @guitar.destroy
+     
+      redirect_to guitars_path
+    else
+      redirect_to root_url
+    end
   end
 
 end
