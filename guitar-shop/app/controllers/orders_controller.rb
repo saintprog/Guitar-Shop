@@ -18,21 +18,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if Guitar.find(params[:guitar_id]).count !=0
-      @order = Order.new(:user_id => params[:user_id], 
-                         :guitar_id => params[:guitar_id],
-                         :cost => params[:cost],
-                         :status => params[:status])
-
+    @order = Order.new(params[:order])
+    if Guitar.find(@order.guitar_id).count !=0
       if @order.save
-        @guitar = Guitar.find(@order.guitar_id)
-        @guitar.update_attribute('count', @guitar.count-1)
         redirect_to guitars_path
       else
         render 'new'
       end
-    else
-      
     end
   end
 
@@ -47,9 +39,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
-    @guitar = Guitar.find(@order.guitar_id)
     @order.destroy
-    @guitar.update_attribute('count', @guitar.count+1)
     redirect_to User.find(@order.user_id)
   end
 

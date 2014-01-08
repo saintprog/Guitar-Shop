@@ -25,12 +25,12 @@ table.table.table-bordered.table-condensed
       p
         td
           - if guitar.count != 0
-            = link_to 'Заказать', orders_path(:user_id => current_user.try(:id), :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
+            = link_to 'Заказать', orders_path(:order => {:user_id => current_user.try(:id), :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'}), method: :post
           - else
             | Товара нет на складе
       td 
         = link_to 'Редактировать', edit_guitar_path(guitar) 
       td 
-        = link_to 'Удалить', guitar_path(guitar),method: :delete, data: { confirm: 'Are you sure?' } 
+        = link_to 'Удалить', guitar_path(guitar), method: :delete, data: { confirm: 'Are you sure?' } 
     
-= link_to 'Новая гитара', new_guitar_path, :class => 'btn' 
+= link_to 'Новая гитара', new_guitar_path, :class => 'btn'

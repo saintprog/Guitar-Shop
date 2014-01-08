@@ -19,14 +19,20 @@ class GuitarsController < ApplicationController
 
   def update
     @guitar = Guitar.find(params[:id])
-    redirect_to @guitar if @guitar.update_attributes(params[:guitar])
-    render 'edit' unless @guitar.update_attributes(params[:guitar])
+    if @guitar.update_attributes(params[:guitar])
+      redirect_to @guitar
+    else
+      render 'edit'
+    end
   end
 
   def create
     @guitar = Guitar.new(params[:guitar])
-    redirect_to @guitar if @guitar.save
-    render 'new' unless @guitar.save
+    if @guitar.save
+      redirect_to @guitar
+    else
+      render 'new'
+    end
   end
 
   def destroy
