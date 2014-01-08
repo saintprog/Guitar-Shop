@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  guitar: 
+  status: MyString
+  cost: 1
+  paid: 1
+
+two:
+  user: 
+  guitar: 
+  status: MyString
+  cost: 1
+  paid: 1
