@@ -24,13 +24,10 @@ table.table.table-bordered.table-condensed
         = guitar.count
       p
         td
-          - if user_signed_in?
-            - if guitar.count != 0
-              = link_to 'Заказать', orders_path(:user_id => current_user.try(:id), :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
-            - else
-              | Товара нет на складе
+          - if guitar.count != 0
+            = link_to 'Заказать', orders_path(:user_id => current_user.try(:id), :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'), method: :post
           - else
-            | Авторизуйтесь
+            | Товара нет на складе
       td 
         = link_to 'Редактировать', edit_guitar_path(guitar) 
       td 
