@@ -13,10 +13,12 @@ class Order < ActiveRecord::Base
     def decrease_guitar
       @guitar = Guitar.find(self.guitar_id)
       @guitar.update_attribute('count', @guitar.count - 1)
+      true
     end
 
     def increase_guitar
       @guitar = Guitar.find(self.guitar_id)
       @guitar.update_attribute('count', @guitar.count + 1)
+      true
     end
 end
