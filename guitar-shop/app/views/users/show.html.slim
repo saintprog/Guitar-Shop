@@ -48,13 +48,13 @@ div.row
             = "Просмотр информации по"
 
           p
-            - @options = [[nil,nil]]
+            - @options = [['Пользователю',nil]]
             - User.all.each do |user|
               - @options.push ["#{user.surname} #{user.name}", user.id]
             = select_tag :user_id, options_for_select(@options), :class => 'input-medium'
 
           p
-            - @options = [[nil,nil]]
+            - @options = [['Гитаре',nil]]
             - Guitar.all.each do |guitar|
               - @options.push ["#{guitar.brand} #{guitar.model}", guitar.id]
             = select_tag :guitar_id, options_for_select(@options), :class => 'input-medium'
