@@ -29,5 +29,3 @@ table.table.table-bordered.table-condensed
               = link_to 'Закозать', orders_path(:order => {:guitar_id => guitar.id, :cost => guitar.cost, :status => 'not defined'}), method: :post
           - else
             | Товара нет на складе
-    
-= link_to 'Новая гитара', new_guitar_path, :class => 'btn'
