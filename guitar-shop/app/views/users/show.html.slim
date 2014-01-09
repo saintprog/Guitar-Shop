@@ -3,7 +3,7 @@ h1.main-header
   = @user.surname + ' ' + @user.name
 
 div.row
-  div.span7
+  div.span9
     dl.dl-horizontal
       dt
         strong Surname: 
@@ -39,3 +39,24 @@ div.row
     div.btn-group
       = link_to 'Назад', guitars_path, :class => 'btn'
       = link_to 'Редактировать', edit_user_path(@user), :class => 'btn'
+
+  .span3
+    - if current_user.try(:id) != nil && current_user.admin?
+      .alert.alert-info.text-right
+        = form_tag(admin_orders_path, method: "get") do
+          h6
+            = "Просмотр информации по"
+
+          p
+            - @options = [[nil,nil]]
+            - User.all.each do |user|
+              - @options.push ["#{user.surname} #{user.name}", user.id]
+            = select_tag :user_id, options_for_select(@options), :class => 'input-medium'
+
+          p
+            - @options = [[nil,nil]]
+            - Guitar.all.each do |guitar|
+              - @options.push ["#{guitar.brand} #{guitar.model}", guitar.id]
+            = select_tag :guitar_id, options_for_select(@options), :class => 'input-medium'
+
+          = submit_tag 'Просмотр заказов', :class => 'btn btn-info'

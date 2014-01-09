@@ -1,0 +1,29 @@
+- if @order.errors.any?
+  div#error_explanation
+    h2 
+      = pluralize(@order.errors.count, "error") 
+      | prohibited from being saved:
+    ul
+    - @order.errors.full_messages.each do |msg|
+      li = msg
+
+= nested_form_for @order do |f|
+  p
+    = f.hidden_field :user_id
+
+  p
+    - @options = [[nil,nil]]
+    - Guitar.all.each do |guitar|
+      - @options.push ["#{guitar.brand} #{guitar.model}", guitar.id]
+    = f.label :guitar_id
+    = f.select :guitar_id, options_for_select(@options, @order.guitar_id)
+
+  p
+    = f.fields_for :payments do |payment|
+      = payment.text_field :summ
+      = payment.link_to_remove "Remove this payment"
+    p
+      = f.link_to_add "Add a payment", :payments
+
+  p
+    =f.submit :class => 'btn btn-primary'

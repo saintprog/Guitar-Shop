@@ -6,6 +6,10 @@ GuitarShop::Application.routes.draw do
   resources :guitars
   resources :orders
 
+  namespace :admin do
+    resources :guitars, :orders
+  end
+
   root :to => 'guitars#index'
 
   # The priority is based upon order of creation:

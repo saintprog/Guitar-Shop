@@ -6,6 +6,8 @@ table.table.table-bordered.table-condensed
     th.span1 Стоимость
     th.span1 Количество
     th.span1 Заказать
+    th.span1 Редактировать
+    th.span1 Удалить
   
  
   - @guitars.each do |guitar|
@@ -29,5 +31,9 @@ table.table.table-bordered.table-condensed
               = link_to 'Закозать', orders_path(:order => {:guitar_id => guitar.id, :cost => guitar.cost, :status => 'not defined'}), method: :post
           - else
             | Товара нет на складе
+      td 
+        = link_to 'Редактировать', edit_guitar_path(guitar) 
+      td 
+        = link_to 'Удалить', guitar_path(guitar), method: :delete, data: { confirm: 'Are you sure?' } 
     
 = link_to 'Новая гитара', new_guitar_path, :class => 'btn'

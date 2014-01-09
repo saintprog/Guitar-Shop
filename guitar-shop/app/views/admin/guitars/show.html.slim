@@ -1,0 +1,30 @@
+h1.main-header 
+  | guitar
+  = @guitar.brand + ' ' + @guitar.model
+
+div.row
+  div.span7
+    dl.dl-horizontal
+      dt
+        strong Brand: 
+      dd.highlighted
+        = @guitar.brand
+       
+      dt
+        strong Model: 
+      dd.highlighted
+        = @guitar.model
+       
+      dt
+        strong Cost: 
+      dd.highlighted
+        = @guitar.cost
+
+      dt
+        strong Count: 
+      dd.highlighted
+        = @guitar.count
+
+    div.btn-group
+      = link_to 'Назад', guitars_path, :class => 'btn'
+      = link_to 'Редактировать', edit_guitar_path(@guitar), :class => 'btn'

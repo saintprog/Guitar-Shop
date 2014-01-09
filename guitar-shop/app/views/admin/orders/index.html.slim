@@ -1,0 +1,23 @@
+h1 Orders#index
+p Find me in app/views/orders/index.html.slim
+
+/ = "! #{@orders} !"
+
+table.table.table-bordered.table-condensed
+  tr
+    th.span1 id
+    th.span3 Покупатель
+    th.span3 Гитара
+    th.span1 Статус
+  
+ 
+  - @orders.each do |order|
+    tr
+      td 
+        = order.id 
+      td 
+        = "#{User.find(order.user_id).surname} #{User.find(order.user_id).name}"
+      td 
+        = "#{Guitar.find(order.guitar_id).brand} #{Guitar.find(order.guitar_id).model}"
+      td 
+        = order.status
