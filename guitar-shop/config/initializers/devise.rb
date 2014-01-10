@@ -1,6 +1,12 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  Warden::Manager.after_authentication do |user, auth, opts|
+    Order.where(status: "not defined").all.each do |order|
+      order.update_attribute('user_id', user.id)
+      order.update_attribute('status', "waiting")
+    end
+  end
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
