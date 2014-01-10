@@ -36,13 +36,13 @@ div.row
                 - order.update_attribute('status', "complete")
                 = " Заказ полностью оплачен"
 
-    div.btn-group
+    div.btn-group.pull-center
       = link_to 'Назад', guitars_path, :class => 'btn'
       = link_to 'Редактировать', edit_user_path(@user), :class => 'btn'
 
   .span3
     - if current_user.try(:id) != nil && current_user.admin?
-      .alert.alert-info.text-right
+      .alert.alert-info.text-center style="padding: 10px"
         = form_tag(admin_orders_path, method: "get") do
           h6
             = "Просмотр информации по"
