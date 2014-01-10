@@ -6,6 +6,7 @@ p Find me in app/views/orders/index.html.slim
 table.table.table-bordered.table-condensed
   tr
     th.span1 id
+    th.span1 Дата заказа
     th.span3 Покупатель
     th.span3 Гитара
     th.span1 Статус
@@ -14,7 +15,9 @@ table.table.table-bordered.table-condensed
   - @orders.each do |order|
     tr
       td 
-        = order.id 
+        = order.id
+      td 
+        = order.created_at.strftime("%d.%m.%Y")
       td 
         = "#{User.find(order.user_id).surname} #{User.find(order.user_id).name}"
       td 
