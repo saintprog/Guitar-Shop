@@ -21,20 +21,14 @@ class OrdersController < ApplicationController
 
   def create
     if Guitar.find(@order.guitar_id).count != 0
-      if @order.save
-        redirect_to guitars_path
-      else
-        render 'new'
-      end
+      redirect_to guitars_path and return if @order.save
+      render 'new'
     end
   end
 
   def update
-    if @order.update_attributes(params[:order])
-      redirect_to User.find(@order.user_id)
-    else
-      render 'edit'
-    end
+    redirect_to User.find(@order.user_id) and return if @order.update_attributes(params[:order])
+    render 'edit'
   end
 
   def destroy

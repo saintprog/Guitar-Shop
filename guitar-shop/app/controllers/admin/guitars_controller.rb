@@ -19,19 +19,13 @@ class Admin::GuitarsController < ApplicationController
   end
 
   def update
-    if @guitar.update_attributes(params[:guitar])
-      redirect_to [:admin, @guitar]
-    else
-      render 'edit'
-    end
+    redirect_to [:admin, @guitar] and return if @guitar.update_attributes(params[:guitar])
+    render 'edit'
   end
 
   def create
-    if @guitar.save
-      redirect_to [:admin, @guitar]
-    else
-      render 'new'
-    end
+    redirect_to [:admin, @guitar] and return if @guitar.save
+    render 'new'
   end
 
   def destroy
