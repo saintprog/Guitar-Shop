@@ -32,8 +32,8 @@ table.table.table-bordered.table-condensed
           - else
             | Товара нет на складе
       td 
-        = link_to 'Редактировать', edit_guitar_path(guitar) 
+        = link_to 'Редактировать', edit_admin_guitar_path(guitar) 
       td 
-        = link_to 'Удалить', guitar_path(guitar), method: :delete, data: { confirm: 'Are you sure?' } 
+        = link_to 'Удалить', admin_guitar_path(guitar), method: :delete, data: { confirm: 'Are you sure?' } 
     
-= link_to 'Новая гитара', new_guitar_path, :class => 'btn'
+= link_to 'Новая гитара', new_admin_guitar_path, :class => 'btn'

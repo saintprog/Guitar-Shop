@@ -7,7 +7,7 @@
     - @guitar.errors.full_messages.each do |msg|
       li = msg
 
-= form_for @guitar do |f|
+= form_for [:admin, @guitar] do |f|
   p
     = f.label :brand
     = f.text_field :brand

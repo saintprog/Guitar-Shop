@@ -26,5 +26,5 @@ div.row
         = @guitar.count
 
     div.btn-group
-      = link_to 'Назад', guitars_path, :class => 'btn'
-      = link_to 'Редактировать', edit_guitar_path(@guitar), :class => 'btn'
+      = link_to 'Назад', admin_guitars_path, :class => 'btn'
+      = link_to 'Редактировать', edit_admin_guitar_path(@guitar), :class => 'btn'
