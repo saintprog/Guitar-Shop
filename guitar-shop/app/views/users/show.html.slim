@@ -60,3 +60,6 @@ div.row
             = select_tag :guitar_id, options_for_select(@options), :class => 'input-medium'
 
           = submit_tag 'Просмотр заказов', :class => 'btn btn-info'
+
+-if current_user.admin?
+  = render "admin"

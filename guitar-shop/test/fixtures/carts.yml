@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  guitar_ids: 1
+
+two:
+  user: 
+  guitar_ids: 1

@@ -1,10 +1,10 @@
 GuitarShop::Application.routes.draw do
-
   devise_for :users
 
   resources :users
   resources :guitars, :only => [:index, :show]
   resources :orders
+  resources :carts
 
   namespace :admin do
     resources :guitars, :orders

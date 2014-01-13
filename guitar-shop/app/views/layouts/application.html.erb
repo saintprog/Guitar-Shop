@@ -33,6 +33,15 @@
         <p class="alert"><%= alert %></p>
       <% end %>
       <%= yield %>
+
+      <% if user_signed_in? %>
+        <% @cart = Cart.where(:user_id == current_user.try(:id)).last %>
+        <div class="cart_div">
+          <p>
+            <%= link_to "Корзина (#{@cart.guitar_ids.length})", cart_path(@cart) %>
+            <%= link_to 'Заказать', orders_path(:guitar_ids => @cart.guitar_ids), method: :post, :class => "btn btn-info" %>
+          </p>
+      <% end %>
       
     </div>
   </div>

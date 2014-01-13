@@ -3,4 +3,6 @@ Warden::Manager.after_authentication do |user, auth, opts|
     order.update_attribute('user_id', user.id)
     order.update_attribute('status', "waiting")
   end
+
+  Cart.create(:user_id => user.id, :guitar_ids => [])
 end

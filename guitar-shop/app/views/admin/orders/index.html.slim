@@ -24,3 +24,5 @@ table.table.table-bordered.table-condensed
         = "#{Guitar.find(order.guitar_id).brand} #{Guitar.find(order.guitar_id).model}"
       td 
         = order.status
+
+= render "admin"
