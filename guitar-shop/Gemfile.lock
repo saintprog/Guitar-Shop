@@ -51,6 +51,11 @@ GEM
       warden (~> 1.2.3)
     devise-russian (2.0.1.1)
       devise
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
@@ -62,6 +67,7 @@ GEM
     jquery-ui-rails (4.1.1)
       railties (>= 3.1.0)
     json (1.8.1)
+    json2-rails (1.0.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -108,6 +114,9 @@ GEM
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 1.3)
+    spine-rails (0.1.2)
+      json2-rails (>= 0.0.2)
+      rails (>= 3.1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -138,11 +147,14 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   devise-russian (~> 2.0.1.1)
+  eco
   jquery-rails
   jquery-ui-rails
+  json2-rails
   nested_form
   rails (= 3.2.13)
   sass-rails
   slim-rails
+  spine-rails
   sqlite3
   uglifier (>= 1.0.3)

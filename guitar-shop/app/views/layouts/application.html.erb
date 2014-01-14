@@ -39,7 +39,7 @@
         <div class="cart_div">
           <p>
             <%= link_to "Корзина (#{@cart.guitar_ids.length})", cart_path(@cart) %>
-            <%= link_to 'Заказать', orders_path(:guitar_ids => @cart.guitar_ids), method: :post, :class => "btn btn-info" %>
+            <%= link_to 'Заказать', orders_path(:guitar_ids => @cart.guitar_ids), method: :post, :class => "btn btn-primary" %>
           </p>
       <% end %>
       

@@ -18,7 +18,9 @@ gem "devise-russian", "~> 2.0.1.1"
 # in production environments by default.
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem "eco"
+  gem "json2-rails"
+  gem "spine-rails"
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

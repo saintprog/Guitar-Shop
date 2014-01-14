@@ -20,16 +20,20 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # if Guitar.find(@order.guitar_id).count != 0
-    #   redirect_to guitars_path and return if @order.save
-    #   render 'new'
-    # end
-
-    params[:guitar_ids].each do |gid|
-      @order = Order.new({:user_id => current_user.id, :guitar_id => gid, :cost => Guitar.find(gid).cost, :status => "waiting"})
-      @order.save
+    if user_signed_in?
+      params[:guitar_ids].each do |gid|
+        @order = Order.new({:user_id => current_user.id, :guitar_id => gid, :cost => Guitar.find(gid).cost, :status => "waiting"})
+        @order.save
+      end
+      @cart = Cart.where(:user_id == current_user.try(:id)).last
+      @cart.guitar_ids.clear
+      redirect_to root_url if @cart.save
+    else
+      if Guitar.find(@order.guitar_id).count != 0
+        redirect_to guitars_path and return if @order.save
+        render 'new'
+      end
     end
-    redirect_to cart_path(Cart.where(:user_id == current_user.try(:id)).last, :update => "ordered"), method: :put
   end
 
   def update

@@ -25,8 +25,9 @@ table.table.table-bordered.table-condensed
           - if guitar.count != 0
             / - if current_user.try(:id) != nil
               / = link_to 'Заказать', orders_path(:order => {:user_id => current_user.try(:id), :guitar_id => guitar.id, :cost => guitar.cost, :status => 'waiting'}), method: :post
-            / - else
-              / = link_to 'Закозать', orders_path(:order => {:guitar_id => guitar.id, :cost => guitar.cost, :status => 'not defined'}), method: :post
-            = link_to 'В корзину', cart_path(Cart.where(:user_id == current_user.try(:id)).last, :guitar_id => guitar.id, :update => "add"), method: :put
+            - if user_signed_in?
+              = link_to 'В корзину', cart_path(Cart.where(:user_id == current_user.try(:id)).last, :guitar_id => guitar.id, :update => "add"), method: :put
+            - else
+              = link_to 'Закозать', orders_path(:order => {:guitar_id => guitar.id, :cost => guitar.cost, :status => 'not defined'}), method: :post
           - else
             | Товара нет на складе

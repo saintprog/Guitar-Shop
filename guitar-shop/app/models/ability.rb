@@ -9,6 +9,7 @@ class Ability
         can :manage, :all
       else
         can :manage, Order
+        can :manage, Cart
         can :read, Guitar
       end
     
