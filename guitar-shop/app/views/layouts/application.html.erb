@@ -34,14 +34,17 @@
       <% end %>
       <%= yield %>
 
-      <% if user_signed_in? %>
-        <% @cart = Cart.where(:user_id == current_user.try(:id)).last %>
-        <div class="cart_div">
-          <p>
-            <%= link_to "Корзина (#{CartGuitar.where(cart_id: @cart.id).count})", cart_path(@cart) %>
-            <%= link_to 'Заказать', orders_path(:cart_id => @cart.id), method: :post, :class => "btn btn-primary" %>
-          </p>
+      <% if session[:cart] == nil %>
+        <% session[:cart] = Cart.create({:user_id => nil}) %>
+      <% else %>
+        <% session[:cart] = Cart.where(:user_id == current_user.try(:id)).last %>
       <% end %>
+      <div class="cart_div">
+        <p>
+          <%= link_to "Корзина (#{CartGuitar.where(cart_id: session[:cart].id).count})", cart_path(session[:cart]) %>
+          <%= link_to 'Заказать', orders_path(:cart_id => session[:cart].id), method: :post, :class => "btn btn-primary" %>
+        </p>
+      </div>
       
     </div>
   </div>
