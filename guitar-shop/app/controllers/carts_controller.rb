@@ -20,7 +20,7 @@ class CartsController < ApplicationController
   def update
     @cart = Cart.where(:user_id == current_user.try(:id)).last
     if params[:update] == "add"
-      @cart.guitar_ids.push params[:guitar_id]
+      CartGuitar.create(:cart_id => params[:cart_id], :guitar_id => params[:guitar_id])
       redirect_to root_url if @cart.save
     elsif params[:update] == "ordered"
       @cart.guitar_ids.clear

@@ -21,13 +21,15 @@ class OrdersController < ApplicationController
 
   def create
     if user_signed_in?
-      params[:guitar_ids].each do |gid|
-        @order = Order.new({:user_id => current_user.id, :guitar_id => gid, :cost => Guitar.find(gid).cost, :status => "waiting"})
-        @order.save
+      @summ = 0
+      Cart.find(params[:cart_id]).guitar_ids.each do |guitar_id|
+        @summ += Guitar.find(guitar_id).cost
       end
-      @cart = Cart.where(:user_id == current_user.try(:id)).last
-      @cart.guitar_ids.clear
-      redirect_to root_url if @cart.save
+      @order = Order.new({:user_id => current_user.id, 
+                          :cart_id => params[:cart_id], 
+                          :cost => @summ,
+                          :status => "waiting"})
+      redirect_to root_url if @order.save
     else
       if Guitar.find(@order.guitar_id).count != 0
         redirect_to guitars_path and return if @order.save

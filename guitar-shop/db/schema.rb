@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140113104829) do
+ActiveRecord::Schema.define(:version => 20140115112603) do
+
+  create_table "cart_guitars", :force => true do |t|
+    t.integer  "guitar_id"
+    t.integer  "cart_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "cart_guitars", ["cart_id"], :name => "index_cart_guitars_on_cart_id"
+  add_index "cart_guitars", ["guitar_id"], :name => "index_cart_guitars_on_guitar_id"
 
   create_table "carts", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +32,11 @@ ActiveRecord::Schema.define(:version => 20140113104829) do
 
   add_index "carts", ["user_id"], :name => "index_carts_on_user_id"
 
+  create_table "carts_guitars", :force => true do |t|
+    t.integer "guitar_id"
+    t.integer "cart_id"
+  end
+
   create_table "guitars", :force => true do |t|
     t.string   "brand"
     t.string   "model"
@@ -31,18 +46,8 @@ ActiveRecord::Schema.define(:version => 20140113104829) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "orders", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "guitar_id"
-    t.string   "status"
-    t.integer  "cost"
-    t.integer  "paid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "orders", ["guitar_id"], :name => "index_orders_on_guitar_id"
-  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+# Could not dump table "orders" because of following StandardError
+#   Unknown type 'belongs_to' for column 'cart_id'
 
   create_table "payments", :force => true do |t|
     t.integer  "order_id"

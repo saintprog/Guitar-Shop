@@ -29,7 +29,7 @@ div.row
             - order.payments.all.each do |payment|
               - @payments += payment.summ
             li.highlighted
-              = link_to "#{Guitar.find(order.guitar_id).brand} #{Guitar.find(order.guitar_id).model}", edit_order_path(order)
+              = link_to "#{order.cost}", edit_order_path(order)
               = " payments: #{@payments} " 
               = link_to 'Отменить заказ', order_path(order), method: :delete
               - if @payments >= order.cost

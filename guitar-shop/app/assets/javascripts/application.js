@@ -15,8 +15,10 @@
 //= require jquery.ui.all
 //= require twitter/bootstrap
 //= require jquery_nested_form
+//= require app
 //= require_tree .
 
 $(function() {
   $('.datepicker').datepicker({ dateFormat: "yy-mm-dd" });
+  new App(el: $(".container")
 });
